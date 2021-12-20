@@ -1,5 +1,7 @@
 import streamlit as st
 import requests
+import pandas as pd
+import json
 
 st.set_page_config(
      page_title="CoD Warzone stats - Avocado Team",
