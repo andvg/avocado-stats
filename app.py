@@ -22,6 +22,7 @@ if st.button('Go!'):
     data = resp_profile.json()['data']['lifetime']['all']['properties']
     username = resp_profile.json()['data']['username']
     st.write('%s stats'%username)
-    st.dataframe(data)
+    df = pd.DataFrame(list(data.items()),columns = ['property','value'])
+    st.dataframe(df)
 else:
     st.write('No data')
