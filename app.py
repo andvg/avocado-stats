@@ -7,7 +7,7 @@ st.set_page_config(
      layout="centered",
      initial_sidebar_state="auto",
      menu_items={
-         'andreavaghi.it': 'https://andreavaghi.it'
+         'andreavaghi.it': "https://andreavaghi.it"
      }
  )
 
