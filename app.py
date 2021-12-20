@@ -11,7 +11,7 @@ st.set_page_config(
  )
 
 st.title('🥑 Avocado Team')
-st.write('CoD Warzone stats')
+st.header('CoD Warzone stats')
 
 sso_token = st.text_input('Enter sso_token')
 
@@ -25,3 +25,13 @@ if sso_token:
     st.table(df)
 else:
     st.write('No data, insert sso_token')
+
+st.subheader('soldier search')
+soldier = st.text_input('Soldier ID')
+
+if soldier:
+    resp_soldier = requests.get('https://my.callofduty.com/api/papi-client/crm/cod/v2/platform/uno/username/Huskerrs/search', cookies=cookies)
+    soldier_data = resp_soldier.json()
+    st.json(resp_soldier)
+else:
+    st.write('No data, insert soldier ID')
