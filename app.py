@@ -32,6 +32,6 @@ soldier = st.text_input('Soldier ID')
 if soldier:
     resp_soldier = requests.get('https://my.callofduty.com/api/papi-client/crm/cod/v2/platform/uno/username/Huskerrs/search', cookies=cookies)
     soldier_data = resp_soldier.json()
-    st.json(resp_soldier)
+    st.json(soldier_data)
 else:
     st.write('No data, insert soldier ID')
