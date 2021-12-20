@@ -5,10 +5,7 @@ st.set_page_config(
      page_title="CoD Warzone stats - Avocado Team",
      page_icon="🔫",
      layout="centered",
-     initial_sidebar_state="auto",
-     menu_items={
-         'andreavaghi.it': "https://andreavaghi.it"
-     }
+     initial_sidebar_state="auto"
  )
 
 st.title('🥑 Avocado Team')
