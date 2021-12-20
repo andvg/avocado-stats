@@ -22,6 +22,6 @@ if sso_token:
     username = resp_profile.json()['data']['username']
     st.write('%s stats'%username)
     df = pd.DataFrame(list(data.items()),columns = ['property','value'])
-    st.dataframe(df)
+    st.table(df)
 else:
     st.write('No data, insert sso_token')
