@@ -24,14 +24,14 @@ if sso_token:
     df = pd.DataFrame(list(data.items()),columns = ['property','value'])
     st.table(df)
 else:
-    st.write('No data, insert sso_token')
+    st.write('No data. Insert sso_token.')
 
-st.subheader('soldier search')
-soldier = st.text_input('Soldier ID')
-
-if soldier:
-    resp_soldier = requests.get('https://my.callofduty.com/api/papi-client/crm/cod/v2/platform/uno/username/%s/search'%soldier, cookies=cookies)
-    soldier_data = resp_soldier.json()
-    st.json(soldier_data)
+st.subheader('Soldier search')
+st.write('Insert tagname')
+soldier_tagname = st.text_input('Soldier tagname')
+if soldier_tagname:
+    resp_soldier_tagname = requests.get('https://my.callofduty.com/api/papi-client/stats/cod/v1/title/mw/platform/uno/gamer/%s/profile/type/wz'%soldier_tagname, cookies=cookies)
+    tagname_data = resp_soldier_tagname.json()
+    st.json(tagname_data)
 else:
-    st.write('No data, insert soldier ID')
+    st.write('No data. Look for a soldier, insert tagname.')
