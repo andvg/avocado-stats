@@ -15,7 +15,7 @@ st.write('CoD Warzone stats')
 
 sso_token = st.text_input('Enter sso_token')
 
-if st.button('Go!'):
+if sso_token:
     cookies = {'ACT_SSO_COOKIE': sso_token}
     resp_profile = requests.get('https://my.callofduty.com/api/papi-client/stats/cod/v1/title/mw/platform/uno/uno/11633078933998920206/profile/type/wz', cookies=cookies)
     data = resp_profile.json()['data']['lifetime']['all']['properties']
@@ -24,4 +24,4 @@ if st.button('Go!'):
     df = pd.DataFrame(list(data.items()),columns = ['property','value'])
     st.dataframe(df)
 else:
-    st.write('No data')
+    st.write('No data, insert sso_token')
