@@ -105,6 +105,7 @@ if sso_token:
     ltW.insert(loc=0, column='usernames', value=pd.Series(usernames))
 
 
-    print(ltW)
+    st.dataframe(ltW)
+    
 else:
     st.write('No data.')
