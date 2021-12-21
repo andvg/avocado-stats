@@ -10,11 +10,19 @@ st.set_page_config(
      initial_sidebar_state="auto"
  )
 
+def get_friends():
+    resp_friends = requests.get('https://my.callofduty.com/api/papi-client/codfriends/v1/compendium', cookies=cookies)
+    friends = resp_friends.json()
+    st.json(friends)
+
+def get_friends_info():
+    resp_friends_info = requests.get('https://my.callofduty.com/api/papi-client/stats/cod/v1/title/mw/platform/uno/gamer/iugav/profile/friends/type/wz', cookies=cookies)
+    friends_info = resp_friends_info.json()
+    st.json(friends_info)
+
 st.title('🥑 Avocado Team')
 st.header('CoD Warzone stats')
-
 sso_token = st.text_input('Enter sso_token')
-
 if sso_token:
     cookies = {'ACT_SSO_COOKIE': sso_token}
     resp_profile = requests.get('https://my.callofduty.com/api/papi-client/stats/cod/v1/title/mw/platform/uno/uno/11633078933998920206/profile/type/wz', cookies=cookies)
@@ -22,18 +30,12 @@ if sso_token:
     username = resp_profile.json()['data']['username']
     st.write('%s stats'%username)
     df = pd.DataFrame(list(data.items()),columns = ['property','value'])
-    st.dataframe(df)
-    resp_friends = requests.get('https://my.callofduty.com/api/papi-client/codfriends/v1/compendium', cookies=cookies)
-    friends = resp_friends.json()
-    st.json(friends)
-    resp_friends_info = requests.get('https://my.callofduty.com/api/papi-client/stats/cod/v1/title/mw/platform/uno/gamer/iugav/profile/friends/type/wz', cookies=cookies)
-    friends_info = resp_friends_info.json()
-    st.json(friends_info)
+    get_friends()
+    get_friends_info()
 else:
     st.write('No data. Insert sso_token.')
 
 st.subheader('Soldier search')
-st.write('Insert tagname')
 soldier_tagname = st.text_input('Soldier tagname')
 if soldier_tagname:
     soldier_tagname = soldier_tagname.replace('#', '%23')
