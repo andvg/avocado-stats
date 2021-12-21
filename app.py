@@ -23,6 +23,9 @@ if sso_token:
     st.write('%s stats'%username)
     df = pd.DataFrame(list(data.items()),columns = ['property','value'])
     st.dataframe(df)
+    resp_friends = requests.get('https://my.callofduty.com/api/papi-client/codfriends/v1/compendium', cookies=cookies)
+    friends = resp_friends.json()
+    st.json(friends)
 else:
     st.write('No data. Insert sso_token.')
 
