@@ -36,6 +36,8 @@ if soldier_tagname:
 else:
     st.write('No data. Insert tagname to search.')
 
+st.write('Insert ID')
+soldier_id = st.text_input('Soldier ID')
 if soldier_id:
     resp_soldier_id = requests.get('https://my.callofduty.com/api/papi-client/stats/cod/v1/title/mw/platform/uno/gamer/%s/profile/type/wz'%soldier_id, cookies=cookies)
     id_data = resp_soldier_id.json()
