@@ -13,6 +13,8 @@ st.set_page_config(
 def get_friends():
     resp_friends = requests.get('https://my.callofduty.com/api/papi-client/codfriends/v1/compendium', cookies=cookies)
     friends = resp_friends.json()
+    for i in friends['data']['uno']:
+    st.write(i['username'])
     st.json(friends)
 
 def get_friends_info():
