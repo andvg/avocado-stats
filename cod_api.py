@@ -51,6 +51,8 @@ if sso_token:
 
 
     #loop for adding friends to data ltA, ltM, ltW DataFrames
+    usernames = ['Iugav']
+
     for i in flData:
         usernames.append(i['username'])
         ltA = ltA.append(pd.Series(list(i['lifetime']['all']['properties'].values()), index=ltA.columns), ignore_index=True)
