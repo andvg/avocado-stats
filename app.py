@@ -26,7 +26,7 @@ if sso_token:
     resp_friends = requests.get('https://my.callofduty.com/api/papi-client/codfriends/v1/compendium', cookies=cookies)
     friends = resp_friends.json()
     st.json(friends)
-    resp_friends_info = requests.get('https://my.callofduty.com/api/papi-client/stats/cod/v1/title/mw/platform/Set by test scripts/gamer/Set by test scripts/profile/friends/type/wz', cookies=cookies)
+    resp_friends_info = requests.get('https://my.callofduty.com/api/papi-client/stats/cod/v1/title/mw/platform/uno/gamer/iugav/profile/friends/type/wz', cookies=cookies)
     friends_info = resp_friends_info.json()
     st.json(friends_info)
 else:
@@ -36,6 +36,7 @@ st.subheader('Soldier search')
 st.write('Insert tagname')
 soldier_tagname = st.text_input('Soldier tagname')
 if soldier_tagname:
+    soldier_tagname = soldier_tagname.replace('#', '%23')
     resp_soldier_tagname = requests.get('https://my.callofduty.com/api/papi-client/stats/cod/v1/title/mw/platform/uno/gamer/%s/profile/type/wz'%soldier_tagname, cookies=cookies)
     tagname_data = resp_soldier_tagname.json()
     st.json(tagname_data)
