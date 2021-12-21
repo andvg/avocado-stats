@@ -1,11 +1,4 @@
 import pandas as pd
-import numpy as np
-import pandas_datareader as web
-import matplotlib.pyplot as plt
-import matplotlib
-import seaborn as sns
-from datetime import datetime
-import matplotlib.ticker as mtick
 import requests
 import json
 
@@ -106,6 +99,6 @@ if sso_token:
 
 
     st.dataframe(ltW)
-    
+
 else:
     st.write('No data.')
