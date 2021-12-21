@@ -30,17 +30,8 @@ st.subheader('Soldier search')
 st.write('Insert tagname')
 soldier_tagname = st.text_input('Soldier tagname')
 if soldier_tagname:
-    resp_soldier_tagname = requests.get('https://my.callofduty.com/api/papi-client/crm/cod/v2/platform/uno/username/%s/search'%soldier_tagname, cookies=cookies)
+    resp_soldier_tagname = requests.get('https://my.callofduty.com/api/papi-client/stats/cod/v1/title/mw/platform/uno/gamer/%s/profile/type/wz'%soldier_tagname, cookies=cookies)
     tagname_data = resp_soldier_tagname.json()
-    print(tagname_data)
-else:
-    st.write('No data. Insert tagname to search.')
-
-st.write('Insert ID')
-soldier_id = st.text_input('Soldier ID')
-if soldier_id:
-    resp_soldier_id = requests.get('https://my.callofduty.com/api/papi-client/stats/cod/v1/title/mw/platform/uno/gamer/%s/profile/type/wz'%soldier_id, cookies=cookies)
-    id_data = resp_soldier_id.json()
-    st.json(id_data)
+    st.json(tagname_data)
 else:
     st.write('No data. Look for a soldier, insert ID.')
