@@ -50,5 +50,31 @@ if sso_token:
 
 
 
+    #loop for adding friends to data ltA, ltM, ltW DataFrames
+    for i in flData:
+        usernames.append(i['username'])
+        ltA = ltA.append(pd.Series(list(i['lifetime']['all']['properties'].values()), index=ltA.columns), ignore_index=True)
+        modeList = []
+        for mode in i['lifetime']['mode'].keys():
+            for j in i['lifetime']['mode'][mode]['properties'].values():
+                modeList.append(j)
+        weaponList = []
+        for wc in i['lifetime']['itemData'].keys():
+            if not wc == 'tacticals':
+                for wp in i['lifetime']['itemData'][wc].keys():
+                    for j in i['lifetime']['itemData'][wc][wp]['properties'].values():
+                        weaponList.append(j)
+        ltM = ltM.append(pd.Series(modeList, index=ltM.columns), ignore_index=True)
+        ltW = ltW.append(pd.Series(weaponList, index=ltW.columns), ignore_index=True)
+
+    # removes # Activision Account Identifier:x
+    usernames = [x[:x.find("#")] if x.find("#") > -1 else x for x in usernames]
+
+    ltA.insert(loc=0, column='usernames', value=pd.Series(usernames))
+    ltM.insert(loc=0, column='usernames', value=pd.Series(usernames))
+    ltW.insert(loc=0, column='usernames', value=pd.Series(usernames))
+
+    st.dataframe(ltW)
+
 else:
     st.write('No data.')
