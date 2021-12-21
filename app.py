@@ -20,6 +20,14 @@ def get_friends_info():
     friends_info = resp_friends_info.json()
     st.json(friends_info)
 
+class Soldier:
+  def __init__(self, tagname, level, prestige):
+    self.tagname = tagname
+    self.level = level
+    self.prestige = prestige
+
+s1 = Soldier("John", 36, 6)
+
 st.title('🥑 Avocado Team')
 st.header('CoD Warzone stats')
 sso_token = st.text_input('Enter sso_token')

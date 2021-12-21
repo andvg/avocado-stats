@@ -2,7 +2,7 @@ import requests
 import json
 import pandas as pd
 
-sso_token = 'MTE2MzMwNzg5MzM5OTg5MjAyMDY6MTY0MTE2MDYwMzIwNzo3YTZkYzQwZDM1MjRhZjA3NWFmOThiNzgxZjA4ZTg4Nw'
+sso_token = 'x'
 cookies = {'ACT_SSO_COOKIE': sso_token}
 resp_profile = requests.get('https://my.callofduty.com/api/papi-client/stats/cod/v1/title/mw/platform/uno/uno/11633078933998920206/profile/type/wz', cookies=cookies)
 data = resp_profile.json()['data']['lifetime']['all']['properties']
