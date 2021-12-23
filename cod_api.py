@@ -37,7 +37,9 @@ if sso_token:
 
     st.dataframe(ltA)
 
-    usernames = ['Iugav']
+    tagnames = ['Iugav']
+    for i in flData['data']:
+        tagnames.append(i['username'].replace('#', '%23'))
 
     for i in tagnames:
         resp = requests.get(url.replace('tagname', i), cookies=cookies)
