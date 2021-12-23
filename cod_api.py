@@ -37,46 +37,14 @@ if sso_token:
 
     st.dataframe(ltA)
 
-    #ltM short hand for lifetime Mode
-    ltM = pd.DataFrame()
-    for key in myData['lifetime']['mode'].keys():
-        df = pd.DataFrame(myData['lifetime']['mode'][key]['properties'].items()).transpose()
-        df.columns = [key + j for j in df.iloc[0]]
-        df = df.drop([0])
-        df = df.reset_index(drop=True)
-        ltM = pd.concat([ltM, df], sort=False, axis=1)
-    
-    st.dataframe(ltM)
-
-
-
-    #loop for adding friends to data ltA, ltM, ltW DataFrames
     usernames = ['Iugav']
 
-    for i in flData:
-        usernames.append(i['username'])
-        ltA = ltA.append(pd.Series(list(i['lifetime']['all']['properties'].values()), index=ltA.columns), ignore_index=True)
-        modeList = []
-        for mode in i['lifetime']['mode'].keys():
-            for j in i['lifetime']['mode'][mode]['properties'].values():
-                modeList.append(j)
-        weaponList = []
-        for wc in i['lifetime']['itemData'].keys():
-            if not wc == 'tacticals':
-                for wp in i['lifetime']['itemData'][wc].keys():
-                    for j in i['lifetime']['itemData'][wc][wp]['properties'].values():
-                        weaponList.append(j)
-        ltM = ltM.append(pd.Series(modeList, index=ltM.columns), ignore_index=True)
-        ltW = ltW.append(pd.Series(weaponList, index=ltW.columns), ignore_index=True)
+    for i in tagnames:
+        resp = requests.get(url.replace('tagname', i), cookies=cookies)
+        data = resp.json()['data']
+        ltA = ltA.append(pd.Series(list(data['lifetime']['all']['properties'].values()), index=ltA.columns), ignore_index=True)
 
-    # removes # Activision Account Identifier:x
-    usernames = [x[:x.find("#")] if x.find("#") > -1 else x for x in usernames]
-
-    ltA.insert(loc=0, column='usernames', value=pd.Series(usernames))
-    ltM.insert(loc=0, column='usernames', value=pd.Series(usernames))
-    ltW.insert(loc=0, column='usernames', value=pd.Series(usernames))
-
-    st.dataframe(ltW)
+    st.dataframe(ltA)
 
 else:
     st.write('No data.')
