@@ -40,7 +40,8 @@ if sso_token:
     tagnames = ['Iugav']
     for i in flData['data']:
         tagnames.append(i['username'].replace('#', '%23'))
-
+    
+    url = 'https://my.callofduty.com/api/papi-client/stats/cod/v1/title/mw/platform/uno/gamer/tagname/profile/type/mp'
     for i in tagnames:
         resp = requests.get(url.replace('tagname', i), cookies=cookies)
         data = resp.json()['data']
