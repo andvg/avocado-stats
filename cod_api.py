@@ -24,7 +24,7 @@ st.header('CoD Warzone stats')
 version = st.selectbox('API version', ['v1', 'v2'])
 game = st.selectbox('Game', {'Modern Warfare':'mw', 'WWII':'wwii', 'Black Ops 4':'boa'})
 if game:
-    st.write(game.values())
+    st.write(game.items())
 
 sso_token = st.text_input('Enter sso_token')
 if sso_token:
