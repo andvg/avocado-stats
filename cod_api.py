@@ -41,7 +41,7 @@ if sso_token:
 
     resp_identity = requests.get(identity, cookies=cookies)
     identityData = resp_identity.json()
-    st.json(identity_data)
+    st.json(identityData)
 
 
 else:
