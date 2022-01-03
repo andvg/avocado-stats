@@ -41,11 +41,15 @@ if sso_token:
 
     resp_identity = requests.get(identity, cookies=cookies)
     identityData = resp_identity.json()
-    st.write(identityData)
+    st.json(identityData)
 
     resp_friends = requests.get(friends, cookies=cookies)
     friendsData = resp_friends.json()
-    st.write(friendsData)
+    st.json(friendsData)
+
+    resp_friends_info = requests.get(friends_info, cookies=cookies)
+    friends_infoData = resp_friends_info.json()
+    st.json(friendsData_info)
 
 else:
     st.write('No data.')
