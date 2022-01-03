@@ -21,6 +21,9 @@ def get_friends_info():
     st.json(friends_info)
 
 st.header('CoD Warzone stats')
+version = st.selectbox('API version', ['v1', 'v2'])
+game = st.selectbox('Game', {'Modern Warfare':'mw', 'WWII':'wwii', 'Black Ops 4':'boa'})
+
 sso_token = st.text_input('Enter sso_token')
 if sso_token:
     cookies = {'ACT_SSO_COOKIE': sso_token}
