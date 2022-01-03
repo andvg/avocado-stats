@@ -49,7 +49,7 @@ if sso_token:
 
     resp_friends_info = requests.get(friends_info, cookies=cookies)
     friends_infoData = resp_friends_info.json()
-    st.json(friendsData_info)
+    st.json(friends_infoData)
 
 else:
     st.write('No data.')
