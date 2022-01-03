@@ -22,37 +22,27 @@ def get_friends_info():
 
 st.header('CoD Warzone stats')
 version = st.selectbox('API version', ['v1', 'v2'])
-game = st.selectbox('Game', {'Modern Warfare':'mw', 'WWII':'wwii', 'Black Ops 4':'boa'})
-if game:
-    st.write(game.items())
+game = st.selectbox('Game', ['mw', 'wwii', 'boa'])
+platform = st.selectbox('Platform', ['uno', 'battle', 'steam'])
+username = st.text_input('Username')
+mode = st.selectbox('Mode', ['wz', 'mp'])
+start = '0' #Useless param - can always remain at 0
+end = '0' #UTC timestamp in microseconds, defaults to 0
+
+identity = 'https://www.callofduty.com/api/papi-client/crm/cod/v2/identities'
+friends = 'https://my.callofduty.com/api/papi-client/codfriends/v1/compendium'
+friends_info = 'https://my.callofduty.com/api/papi-client/stats/cod/v1/title/'+game+'/platform/'+platform+'/gamer/'+username+'/profile/friends/type/'+mode+''
+wz_profile = 'https://my.callofduty.com/api/papi-client/stats/cod/v1/title/'+game+'/platform/'+platform+'/gamer/'+username+'/profile/type/'+mode+''
+wz_matches = 'https://my.callofduty.com/api/papi-client/crm/cod/v2/title/'+game+'/platform/'+platform+'/gamer/'+username+'/matches/'+mode+'/start/'+start+'/end/'+end+'/details'
 
 sso_token = st.text_input('Enter sso_token')
 if sso_token:
     cookies = {'ACT_SSO_COOKIE': sso_token}
-    resp_profile = requests.get('https://my.callofduty.com/api/papi-client/stats/cod/v1/title/mw/platform/uno/uno/11633078933998920206/profile/type/wz', cookies=cookies)
-    myData = resp_profile.json()['data']
-    resp_friends_info = requests.get('https://my.callofduty.com/api/papi-client/stats/cod/v1/title/mw/platform/uno/gamer/iugav/profile/friends/type/wz', cookies=cookies)
-    flData = resp_friends_info.json()
 
-    # ltA short hand for lifetime All
-    ltA = pd.DataFrame(myData['lifetime']['all']['properties'].items()).transpose()
-    ltA.columns = ltA.iloc[0]
-    ltA = ltA.drop([0])
-    ltA = ltA.reset_index(drop=True)
+    resp_identity = requests.get(identity, cookies=cookies)
+    identityData = resp_identity.json()
+    st.json(identity_data)
 
-    st.dataframe(ltA)
-
-    tagnames = ['Iugav']
-    for i in flData['data']:
-        tagnames.append(i['username'].replace('#', '%23'))
-    
-    url = 'https://my.callofduty.com/api/papi-client/stats/cod/v1/title/mw/platform/uno/gamer/tagname/profile/type/mp'
-    for i in tagnames:
-        resp = requests.get(url.replace('tagname', i), cookies=cookies)
-        data = resp.json()['data']
-        ltA = ltA.append(pd.Series(list(data['lifetime']['all']['properties'].values()), index=ltA.columns), ignore_index=True)
-
-    st.dataframe(ltA)
 
 else:
     st.write('No data.')
